@@ -1,6 +1,5 @@
 const API_KEY = "CG-HPcCn7VjGtskRmRfAnHiaYce";
 
-// ── Persistence (localStorage) ───────────────────────────────────────────────
 const STORAGE_KEY = 'cryptoPortfolio_v1';
 
 function loadHoldings() {
@@ -12,12 +11,10 @@ function saveHoldings(holdings) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(holdings));
 }
 
-// ── State ────────────────────────────────────────────────────────────────────
 let holdings = loadHoldings();   // [{ id, coinId, name, symbol, qty, buyPrice, buyDate }]
 let currentPrices = {};          // { coinId: price }
 let editingId = null;            // id of holding being edited
 
-// ── Bootstrap ────────────────────────────────────────────────────────────────
 export function initPortfolio() {
     injectPortfolioHTML();
     injectPortfolioStyles();
@@ -25,7 +22,6 @@ export function initPortfolio() {
     refresh();
 }
 
-// ── HTML injection ────────────────────────────────────────────────────────────
 function injectPortfolioHTML() {
     const main = document.querySelector('main');
 
@@ -117,14 +113,12 @@ function injectPortfolioHTML() {
     main.appendChild(section);
 }
 
-// ── Event binding ─────────────────────────────────────────────────────────────
 function bindEvents() {
     document.getElementById('pf-add-btn').onclick    = handleAddOrSave;
     document.getElementById('pf-cancel-btn').onclick = cancelEdit;
     document.getElementById('pf-refresh-btn').onclick = refresh;
 }
 
-// ── Add / Edit logic ──────────────────────────────────────────────────────────
 async function handleAddOrSave() {
     const coinRaw  = document.getElementById('pf-coin-input').value.trim().toLowerCase();
     const qty      = parseFloat(document.getElementById('pf-qty-input').value);
@@ -216,7 +210,6 @@ function clearForm() {
     document.getElementById('pf-cancel-btn').style.display = 'none';
 }
 
-// ── Refresh: fetch prices → render ────────────────────────────────────────────
 async function refresh() {
     if (!holdings.length) { renderTable(); renderSummary(); renderDonut(); return; }
 
@@ -237,7 +230,6 @@ async function refresh() {
     renderDonut();
 }
 
-// ── Table render ──────────────────────────────────────────────────────────────
 function renderTable() {
     const empty = document.getElementById('pf-empty');
     const table = document.getElementById('pf-table');
@@ -287,7 +279,6 @@ function renderTable() {
         b.onclick = () => deleteHolding(parseInt(b.dataset.id)));
 }
 
-// ── Summary cards ─────────────────────────────────────────────────────────────
 function renderSummary() {
     let totalCost = 0, totalValue = 0, hasPrice = false;
 
@@ -321,7 +312,6 @@ function renderSummary() {
     }
 }
 
-// ── Donut chart (allocation by current value) ─────────────────────────────────
 let donutChart = null;
 const PALETTE = ['#F7931A','#627EEA','#26A17B','#E84142','#A855F7','#3B82F6','#F59E0B','#10B981','#EC4899','#6366F1'];
 
@@ -378,16 +368,13 @@ function renderDonut() {
     `).join('');
 }
 
-// ── Utility ───────────────────────────────────────────────────────────────────
 function fmt(n) {
     return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// ── Styles ────────────────────────────────────────────────────────────────────
 function injectPortfolioStyles() {
     const s = document.createElement('style');
     s.textContent = `
-    /* ── Section shell ── */
     #portfolio-section {
         margin: 32px auto 0;
         max-width: 1100px;
@@ -398,7 +385,6 @@ function injectPortfolioStyles() {
         font-family: inherit;
     }
 
-    /* ── Header ── */
     .pf-header { padding: 20px 24px 0; }
     .pf-title-row {
         display: flex;
@@ -431,7 +417,6 @@ function injectPortfolioStyles() {
     }
     #pf-refresh-btn:hover { border-color: #F7931A; color: #F7931A; }
 
-    /* ── Summary cards ── */
     .pf-summary {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -455,7 +440,6 @@ function injectPortfolioStyles() {
     .pf-card-value.neg { color: #EF4444; }
     .pf-card--pnl { border-color: #374151; }
 
-    /* ── Add form ── */
     .pf-form-wrap { padding: 0 24px 16px; border-bottom: 1px solid #1F2937; }
     .pf-form-title { font-size: 13px; font-weight: 600; color: #9CA3AF; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .06em; }
     .pf-form {
@@ -509,7 +493,6 @@ function injectPortfolioStyles() {
     }
     #pf-cancel-btn:hover { border-color: #EF4444; color: #EF4444; }
 
-    /* ── Table ── */
     .pf-table-wrap { overflow-x: auto; }
     #pf-empty {
         padding: 32px;
@@ -558,7 +541,6 @@ function injectPortfolioStyles() {
         margin-right: 4px;
     }
 
-    /* ── Row actions ── */
     .pf-actions { display: flex; gap: 4px; }
     .pf-edit-btn, .pf-delete-btn {
         background: transparent;
@@ -572,7 +554,6 @@ function injectPortfolioStyles() {
     .pf-edit-btn:hover   { border-color: #3B82F6; background: rgba(59,130,246,0.1); }
     .pf-delete-btn:hover { border-color: #EF4444; background: rgba(239,68,68,0.1); }
 
-    /* ── Donut / Allocation ── */
     .pf-alloc-wrap {
         padding: 20px 24px 24px;
         border-top: 1px solid #1F2937;
