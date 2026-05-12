@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Price MS </title>
+    <link rel="icon" type="image/png" href="cryptoIcon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+</head>
+
+<!--line 9 is to import the Chart.js library, using the link from jsDelivr
+line 10 is to import the Hammer.js library, which allows for 
+line 11 is to import the Chart.js Zoom plugin 
+line 12 is to import the Plotly.js library for drawing features-->
+
+<body>
+    <header>
+        <img src="cryptoIcon copy.png" alt="Crypto Icon">
+        <h1>Crypto Price MS</h1>
+
+        <div class="search-container">
+            <input type="text" id="coinSearch" placeholder="Enter Coin ID (e.g., bitcoin)...">
+            <button onclick="fetchData()">Track Coin</button>
+        </div>    
+    </header>
+
+    <main>
+        <section id="chart-section">
+            <canvas id="priceChart"></canvas>
+        </section>
+
+        <section id="prediction-section">
+            <h2>What price will Bitcoin hit in this month?</h2>
+            <p id="predictionResult">Search for a coin to see the price prediction</p>
+        </section>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
