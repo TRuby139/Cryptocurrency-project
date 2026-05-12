@@ -1,14 +1,16 @@
 import { createChart, CrosshairMode, LineStyle } from 'https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.1/+esm';
 import { initPortfolio } from './portfolio.js';
 
+// ─── State ────────────────────────────────────────────────────────────────────
 let myChartJS = null;          // Chart.js instance
 let lwChart = null;            // Lightweight-charts instance
 let lwSeries = {};             // Named series inside lwChart
 let currentMode = 'chartjs';   // 'chartjs' | 'lightweight'
 let lastPrices = [];           // Cache last fetched prices for mode-switch
 
-const API_KEY = "enter your coingecko API key here";
+const API_KEY = "enter your CoinGecko API key here";
 
+// ─── Init: inject toggle button & indicator toolbar ──────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     injectUI();
     initPortfolio();
@@ -69,6 +71,7 @@ function injectUI() {
     injectStyles();
 }
 
+// ─── Fetch (unchanged logic, just saves prices) ───────────────────────────────
 window.fetchData = async function () {
     const coinId = document.getElementById('coinSearch').value.toLowerCase().trim();
     const predictionText = document.getElementById('predictionResult');
@@ -112,6 +115,7 @@ window.fetchData = async function () {
     }
 };
 
+// ─── Chart.js renderer (original) ────────────────────────────────────────────
 function renderChartJS(priceData, coinId) {
     const canvas = document.getElementById('priceChart');
     canvas.style.display = 'block';
@@ -149,6 +153,7 @@ function renderChartJS(priceData, coinId) {
     });
 }
 
+// ─── Lightweight chart renderer ───────────────────────────────────────────────
 function renderLightweightChart(priceData) {
     const canvas = document.getElementById('priceChart');
     canvas.style.display = 'none';
@@ -173,6 +178,7 @@ function renderLightweightChart(priceData) {
     // Destroy old instances
     destroyLW();
 
+    // ── Main chart ──────────────────────────────────────────────────────
     lwChart = createChart(lwContainer, chartOptions(lwContainer));
 
     const areaSeries = lwChart.addAreaSeries({
@@ -187,6 +193,7 @@ function renderLightweightChart(priceData) {
     const lineData = priceData.map(p => ({ time: Math.floor(p[0] / 1000), value: p[1] }));
     areaSeries.setData(dedupeByTime(lineData));
 
+    // ── Moving Averages ─────────────────────────────────────────────────
     if (active['ma']) {
         const prices = priceData.map(p => p[1]);
         const times = priceData.map(p => Math.floor(p[0] / 1000));
@@ -205,6 +212,7 @@ function renderLightweightChart(priceData) {
         });
     }
 
+    // ── Volume ──────────────────────────────────────────────────────────
     if (active['volume']) {
         const volSeries = lwChart.addHistogramSeries({
             color: 'rgba(247,147,26,0.3)',
@@ -226,6 +234,7 @@ function renderLightweightChart(priceData) {
     lwChart.timeScale().fitContent();
     lwSeries.main = areaSeries;
 
+    // ── RSI sub-chart ───────────────────────────────────────────────────
     if (showRSI) {
         const rsiContainer = document.getElementById('rsiContainer');
         const rsiChart = createChart(rsiContainer, subChartOptions(rsiContainer, 'RSI (14)'));
@@ -252,6 +261,7 @@ function renderLightweightChart(priceData) {
         lwSeries.rsiChart = rsiChart;
     }
 
+    // ── MACD sub-chart ──────────────────────────────────────────────────
     if (showMACD) {
         const macdContainer = document.getElementById('macdContainer');
         const macdChart = createChart(macdContainer, subChartOptions(macdContainer, 'MACD (12,26,9)'));
@@ -281,6 +291,7 @@ function destroyLW() {
     lwSeries = {};
 }
 
+// ─── Toggle ───────────────────────────────────────────────────────────────────
 function toggleChartMode() {
     const btn = document.getElementById('chartToggleBtn');
     if (currentMode === 'chartjs') {
@@ -308,6 +319,7 @@ function toggleChartMode() {
     }
 }
 
+// ─── Chart option helpers ──────────────────────────────────────────────────────
 function chartOptions(container) {
     return {
         width: container.clientWidth,
@@ -330,6 +342,7 @@ function subChartOptions(container, title) {
     };
 }
 
+// ─── Technical Indicator Math ──────────────────────────────────────────────────
 
 function dedupeByTime(arr) {
     const seen = new Set();
@@ -389,6 +402,7 @@ function calcMACD(prices, times, fast = 12, slow = 26, signal = 9) {
     return { macdLine, signalLine, histogram };
 }
 
+// ─── Prediction (unchanged) ───────────────────────────────────────────────────
 function performPrediction(prices) {
     const n = prices.length;
     let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
@@ -401,6 +415,7 @@ function performPrediction(prices) {
     document.getElementById('predictionResult').innerText = `Predicted next price point: $${nextPrice.toFixed(2)}`;
 }
 
+// ─── Dynamic styles ───────────────────────────────────────────────────────────
 function injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
