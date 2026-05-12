@@ -1,0 +1,87 @@
+body {
+    font-family: Inter, -apple-system, BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    margin: 0;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background: linear-gradient(to right, #ffffff, rgb(255, 255, 255));
+    color: rgb(0, 0, 0);
+    width: 100%;
+    border-bottom: 0.5px solid hsl(0, 5%, 92%);
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
+header img{
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+header h1{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.search-container input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px 0 0 8px; /* Rounded corners on the left only */
+  outline: none;
+  font-size: 14px;
+  width: 200px;
+  transition: border-color 0.3s;
+}
+
+.search-container {
+    margin: 10px 10px;
+    margin-left: auto;
+    border-radius: 1px solid #d2d7db;
+}
+
+.search-container button {
+  padding: 10px 20px;
+  background-color: hsl(45, 80%, 50%); /* Match the gold logo color */
+  border: 1px solid hsl(45, 80%, 50%);
+  border-radius: 0 8px 8px 0; /* Rounded corners on the right only */
+  color: #000000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-container button:hover {
+  background-color: hsl(45, 80%, 65%); /* Darker gold on hover */
+}
+
+main {
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    max-width: 1000px;
+    margin-top: 20px;
+}
+
+#chart-section {
+    background: white;
+    padding: 20px;
+    border: 0.2px solid #d2d7db;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#prediction-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: #ecf0f1;
+    border : 0.2px solid #d2d7db;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
