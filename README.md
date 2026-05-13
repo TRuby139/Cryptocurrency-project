@@ -6,6 +6,8 @@ Core Functionality:
 
 •	Display real-time and historical cryptocurrency price data using interactive charts (e.g., line charts, candlestick charts).
 
+•	Implement a portfolio management module that allows users to record, track, and evaluate their crypto holdings, including profit/loss analysis.
+
 •	Provide basic technical analysis indicators (e.g., moving averages, RSI, MACD, trading volume).
 
 •	Include a cryptocurrency price prediction feature using machine learning or statistical techniques (e.g., linear regression).
