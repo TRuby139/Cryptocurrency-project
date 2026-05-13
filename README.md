@@ -23,4 +23,6 @@ How to use it:
 5. Open script.js
 6. Go to line 10 and find this code
 7. const API_KEY = "enter your coingecko API key here";
-8. open the html file with live server
+8. Open portfolio.js
+9. Go to line 1 and repeat step 7
+10. open the html file with live server

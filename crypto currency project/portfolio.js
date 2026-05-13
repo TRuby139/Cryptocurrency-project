@@ -1,4 +1,4 @@
-const API_KEY = "CG-HPcCn7VjGtskRmRfAnHiaYce";
+const API_KEY = "enter-your-api-key-here";  // Get a free key at https://www.coingecko.com/en/api   
 
 const STORAGE_KEY = 'cryptoPortfolio_v1';
 
