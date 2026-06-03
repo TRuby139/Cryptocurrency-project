@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Price MS</title>
+    <title>Crypto Price MS </title>
     <link rel="icon" type="image/png" href="cryptoIcon.png">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
@@ -13,13 +13,13 @@
 
 <!--line 9 is to import the Chart.js library, using the link from jsDelivr
 line 10 is to import the Hammer.js library, which allows for 
-line 11 is to import the Chart.js Zoom plugin 
-line 12 is to import the Plotly.js library for drawing features-->
+line 11 is to import the Chart.js Zoom plugin -->
 
 <body>
     <header>
         <img src="cryptoIcon copy.png" alt="Crypto Icon">
         <h1>Crypto Price MS</h1>
+
         <div class="search-container">
             <input type="text" id="coinSearch" placeholder="Enter Coin ID (e.g., bitcoin)...">
             <button onclick="fetchData()">Track Coin</button>
@@ -32,66 +32,8 @@ line 12 is to import the Plotly.js library for drawing features-->
         </section>
 
         <section id="prediction-section">
-            <h2>What price will Bitcoin hit next?</h2>
+            <h2>What price will Bitcoin hit in this month?</h2>
             <p id="predictionResult">Search for a coin to see the price prediction</p>
-        </section>
-
-        <section id="portfolio-section" class="portfolio-section">
-            <div class="portfolio-header">
-                <div class="title-row">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                        <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
-                    </svg>
-                    <h2>Portfolio</h2>
-                    <button id="refresh-btn" title="Refresh prices">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
-                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-                        </svg> Refresh
-                    </button>
-                </div>
-
-                <div class="portfolio-summary">
-                    <div class="summary-card"><span class="card-label">Total Value</span><span class="card-value" id="total-value">—</span></div>
-                    <div class="summary-card"><span class="card-label">Total Cost</span><span class="card-value" id="total-cost">—</span></div>
-                    <div class="summary-card summary-card-pnl"><span class="card-label">Total P&L</span><span class="card-value" id="total-pnl">—</span></div>
-                    <div class="summary-card summary-card-pnl"><span class="card-label">P&L %</span><span class="card-value" id="total-pnl-pct">—</span></div>
-                </div>
-            </div>
-
-            <div class="form-wrapper">
-                <div class="form-title" id="form-title">Add Holding</div>
-                <div class="portfolio-form">
-                    <input id="coin-input" type="text" placeholder="Coin ID (e.g. bitcoin)" autocomplete="off"/>
-                    <input id="qty-input" type="number" placeholder="Quantity" min="0" step="any"/>
-                    <input id="price-input" type="number" placeholder="Buy Price (USD)" min="0" step="any"/>
-                    <input id="date-input" type="date" title="Purchase date (optional)"/>
-                    <button id="add-btn">Add</button>
-                    <button id="cancel-btn" style="display:none">Cancel</button>
-                </div>
-            </div>
-
-            <div class="table-wrapper">
-                <div id="empty-state" class="empty-state">No holdings yet. Add your first coin above.</div>
-                <table id="portfolio-table" style="display:none">
-                    <thead>
-                        <tr>
-                            <th>Coin</th><th>Qty</th><th>Buy Price</th><th>Current Price</th>
-                            <th>Value</th><th>Cost</th><th>P&L</th><th>P&L %</th><th>Date</th><th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="portfolio-tbody"></tbody>
-                </table>
-            </div>
-
-            <div id="allocation-wrapper" class="allocation-wrapper" style="display:none">
-                <div class="allocation-title">Allocation</div>
-                <div class="allocation-inner">
-                    <canvas id="donut-chart" width="200" height="200"></canvas>
-                    <div id="donut-legend" class="donut-legend"></div>
-                </div>
-            </div>
         </section>
     </main>
 
