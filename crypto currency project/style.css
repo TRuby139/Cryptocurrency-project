@@ -67,6 +67,11 @@ main {
     margin-bottom: 40px;
 }
 
+
+#chart-section{
+    max-width: 100%;
+    min-height: 300px;
+}
 #chart-section, #prediction-section {
     background: white;
     padding: 20px;
